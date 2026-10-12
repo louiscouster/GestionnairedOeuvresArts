@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestionnaire d'oeuvres d'arts</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Gestionnaire d'oeuvres d'arts</h1>
+
+      <!-- Petits tableaux de statistiques (mis à jour par script.js) -->
+      <section class="stats" aria-label="Statistiques de la collection">
+        <div class="stat">
+          <span class="stat-valeur" id="stat-total">0</span>
+          <span class="stat-label">Œuvres acquises</span>
+        </div>
+        <div class="stat">
+          <span class="stat-valeur" id="stat-artistes">0</span>
+          <span class="stat-label">Artistes</span>
+        </div>
+        <div class="stat">
+          <span class="stat-valeur" id="stat-musees">0</span>
+          <span class="stat-label">Musées</span>
+        </div>
+        <div class="stat">
+          <span class="stat-valeur" id="stat-annee-moyenne">–</span>
+          <span class="stat-label">Année moyenne</span>
+        </div>
+        <div class="stat">
+          <span class="stat-valeur" id="stat-age-moyen">–</span>
+          <span class="stat-label">Âge moyen (ans)</span>
+        </div>
+        <div class="stat">
+          <span class="stat-valeur" id="stat-plus-ancienne">–</span>
+          <span class="stat-label">Plus ancienne</span>
+        </div>
+      </section>
+
+      <form id="formulaire-oeuvre">
+        <label for="champ-titre">Titre</label>
+        <input type="text" id="champ-titre" name="titre" required />
+
+        <label for="champ-artiste">Artiste</label>
+        <input type="text" id="champ-artiste" name="artiste" required />
+
+        <label for="champ-annee">Année</label>
+        <input
+          type="number"
+          id="champ-annee"
+          name="annee"
+          min="1"
+          max="2026"
+          required
+        />
+
+        <label for="champ-technique">Technique</label>
+        <input type="text" id="champ-technique" name="technique" />
+
+        <label for="champ-musee">Musée</label>
+        <input type="text" id="champ-musee" name="musee" />
+
+        <button type="submit">Enregistrer</button>
+      </form>
+
+      <h2>Œuvre enregistrée</h2>
+
+      <!-- Mise a jour de la carte -->
+      <section class="carte-oeuvre" id="carte-oeuvre">
+        <p class="titre-oeuvre" id="titre-oeuvre">
+          Aucune œuvre pour l'instant
+        </p>
+        <p class="artiste-annee-oeuvre" id="artiste-annee-oeuvre"></p>
+        <p class="technique-oeuvre" id="technique-oeuvre"></p>
+        <p class="musee-oeuvre" id="musee-oeuvre"></p>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
