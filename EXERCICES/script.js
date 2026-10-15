@@ -54,3 +54,4 @@ const filtrerStock = () => {
     document.querySelector('#catalogue').textContent =
         visibles.map((a) => a.nom).join(", ");
 }
+

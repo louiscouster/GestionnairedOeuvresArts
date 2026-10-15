@@ -7,112 +7,68 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <main>
-      <h1>Gestionnaire d'oeuvres d'arts</h1>
+    <h1>Gestionnaire d'oeuvres d'arts</h1>
 
-      <!-- Statistiques (mises à jour par script.js avec reduce / Math) -->
-      <section class="stats" aria-label="Statistiques de la collection">
-        <div class="stat">
-          <span class="stat-valeur" id="stat-total">0</span>
-          <span class="stat-label">Œuvres acquises</span>
-        </div>
-        <div class="stat">
-          <span class="stat-valeur" id="stat-affichees">0</span>
-          <span class="stat-label">Affichées</span>
-        </div>
-        <div class="stat">
-          <span class="stat-valeur" id="stat-artistes">0</span>
-          <span class="stat-label">Artistes</span>
-        </div>
-        <div class="stat">
-          <span class="stat-valeur" id="stat-musees">0</span>
-          <span class="stat-label">Musées</span>
-        </div>
-        <div class="stat">
-          <span class="stat-valeur" id="stat-annee-moyenne">–</span>
-          <span class="stat-label">Année moyenne</span>
-        </div>
-        <div class="stat">
-          <span class="stat-valeur" id="stat-age-moyen">–</span>
-          <span class="stat-label">Âge moyen (ans)</span>
-        </div>
-        <div class="stat">
-          <span class="stat-valeur" id="stat-plus-ancienne">–</span>
-          <span class="stat-label">Plus ancienne</span>
-        </div>
-        <div class="stat">
-          <span class="stat-valeur" id="stat-plus-recente">–</span>
-          <span class="stat-label">Plus récente</span>
-        </div>
-      </section>
-
-      <form id="formulaire-oeuvre" onsubmit="ajouterOeuvre(event)" novalidate>
-        <label for="champ-titre">Titre</label>
-        <input
-          type="text"
-          id="champ-titre"
-          name="titre"
-          oninput="controlerSaisie(this)"
-          required
-        />
-
-        <label for="champ-artiste">Artiste</label>
-        <input
-          type="text"
-          id="champ-artiste"
-          name="artiste"
-          oninput="controlerSaisie(this)"
-          required
-        />
-
-        <label for="champ-annee">Année</label>
-        <input
-          type="number"
-          id="champ-annee"
-          name="annee"
-          min="1"
-          max="2026"
-          oninput="controlerSaisie(this)"
-          required
-        />
-
-        <label for="champ-technique">Technique</label>
-        <input type="text" id="champ-technique" name="technique" />
-
-        <label for="champ-musee">Musée</label>
-        <input type="text" id="champ-musee" name="musee" />
-
-        <button type="submit">Enregistrer</button>
-        <p class="message-erreur" id="message-erreur" role="status"></p>
-      </form>
-
-      <h2>Collection</h2>
-
-      <!-- Recherche textuelle + sélecteur d'époque (filter) -->
-      <div class="filtres">
-        <input
-          type="search"
-          id="recherche"
-          placeholder="Rechercher (titre, artiste, musée…)"
-          aria-label="Rechercher une œuvre"
-          oninput="mettreAJourAffichage()"
-        />
-        <select
-          id="filtre-epoque"
-          aria-label="Filtrer par époque"
-          onchange="mettreAJourAffichage()"
-        >
-          <option value="">Toutes les époques</option>
-          <option value="Moyen Âge">Moyen Âge</option>
-          <option value="Classique">Classique</option>
-          <option value="XIXe siècle">XIXe siècle</option>
-          <option value="Moderne">Moderne</option>
-        </select>
+    <!-- Statistiques (mises à jour par script.js) -->
+    <section class="stats">
+      <div class="stat">
+        <span class="stat-valeur" id="stat-total">0</span>
+        <span class="stat-label">Œuvres acquises</span>
       </div>
+      <div class="stat">
+        <span class="stat-valeur" id="stat-artistes">0</span>
+        <span class="stat-label">Artistes</span>
+      </div>
+      <div class="stat">
+        <span class="stat-valeur" id="stat-musees">0</span>
+        <span class="stat-label">Musées</span>
+      </div>
+      <div class="stat">
+        <span class="stat-valeur" id="stat-annee-moyenne">–</span>
+        <span class="stat-label">Année moyenne</span>
+      </div>
+      <div class="stat">
+        <span class="stat-valeur" id="stat-age-moyen">–</span>
+        <span class="stat-label">Âge moyen (ans)</span>
+      </div>
+      <div class="stat">
+        <span class="stat-valeur" id="stat-plus-ancienne">–</span>
+        <span class="stat-label">Plus ancienne</span>
+      </div>
+    </section>
 
-      <section class="liste-oeuvres" id="liste-oeuvres"></section>
-    </main>
+    <!-- Formulaire d'ajout -->
+    <form id="formulaire-oeuvre">
+      <label for="champ-titre">Titre</label>
+      <input type="text" id="champ-titre" required />
 
-    <script src="script.js"></script>
+      <label for="champ-artiste">Artiste</label>
+      <input type="text" id="champ-artiste" required />
+
+      <label for="champ-annee">Année</label>
+      <input type="number" id="champ-annee" min="1" max="2026" required />
+
+      <label for="champ-technique">Technique</label>
+      <input type="text" id="champ-technique" />
+
+      <label for="champ-musee">Musée</label>
+      <input type="text" id="champ-musee" />
+
+      <button type="submit">Enregistrer</button>
+      <p class="erreur" id="message-erreur"></p>
+    </form>
+
+    <h2>Œuvres enregistrées</h2>
+
+    <!-- Carte modèle : script.js la copie pour chaque œuvre -->
+    <section class="carte-oeuvre" id="carte-oeuvre">
+      <p class="titre-oeuvre">Chargement…</p>
+      <p class="artiste-annee-oeuvre"></p>
+      <p class="technique-oeuvre"></p>
+      <p class="musee-oeuvre"></p>
+    </section>
+
+    <!-- type="module" : permet d'utiliser import / export -->
+    <script type="module" src="js/main.js"></script>
   </body>
 </html>

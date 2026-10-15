@@ -1,283 +1,67 @@
-* {
-  box-sizing: border-box;
-}
-
 body {
-  font-family: system-ui, sans-serif;
-  background-color: #efe6d6;
-  /* Taches de peinture + texture de toile */
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35  0 0 0 0 .25  0 0 0 0 .15  0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
-    repeating-linear-gradient(0deg, rgba(120, 90, 60, 0.05) 0 1px, transparent 1px 4px),
-    repeating-linear-gradient(90deg, rgba(120, 90, 60, 0.05) 0 1px, transparent 1px 4px),
-    radial-gradient(ellipse 40% 30% at 8% 12%, rgba(196, 62, 52, 0.45), transparent 70%),
-    radial-gradient(ellipse 35% 35% at 92% 20%, rgba(44, 94, 150, 0.45), transparent 70%),
-    radial-gradient(ellipse 40% 30% at 85% 85%, rgba(232, 180, 40, 0.5), transparent 70%),
-    radial-gradient(ellipse 35% 30% at 10% 88%, rgba(60, 130, 110, 0.4), transparent 70%);
-  background-attachment: fixed;
-  color: #2b2b2b;
-  margin: 0;
-  padding: 2rem 1rem;
-}
-
-/* Coups de pinceau et toiles encadrées (décor, derrière le contenu) */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800' preserveAspectRatio='xMidYMid slice'%3E%0A%3Cg fill='none' stroke-linecap='round'%3E%0A%3Cpath d='M-50 120 C 200 40, 350 220, 600 90 S 1000 20, 1250 140' stroke='%23c43e34' stroke-width='38' opacity='.35'/%3E%0A%3Cpath d='M-50 700 C 250 620, 450 780, 700 690 S 1050 640, 1250 730' stroke='%232c5e96' stroke-width='44' opacity='.3'/%3E%0A%3Cpath d='M900 -20 C 1000 200, 850 350, 1000 520' stroke='%23e8b428' stroke-width='30' opacity='.35'/%3E%0A%3Cpath d='M-20 300 C 80 380, 20 520, 140 620' stroke='%233c826e' stroke-width='28' opacity='.3'/%3E%0A%3Cpath d='M300 780 C 420 700, 520 760, 640 740' stroke='%23d9803a' stroke-width='22' opacity='.3'/%3E%0A%3C/g%3E%0A%3Cg opacity='.4'%3E%0A%3Ccircle cx='330' cy='60' r='9' fill='%23c43e34'/%3E%3Ccircle cx='352' cy='84' r='5' fill='%23c43e34'/%3E%0A%3Ccircle cx='880' cy='330' r='8' fill='%232c5e96'/%3E%3Ccircle cx='905' cy='352' r='4' fill='%232c5e96'/%3E%0A%3Ccircle cx='240' cy='520' r='7' fill='%23e8b428'/%3E%3Ccircle cx='1120' cy='300' r='10' fill='%233c826e'/%3E%0A%3C/g%3E%0A%3Cg transform='translate(60 210) rotate(-7)' opacity='.9'%3E%0A%3Crect x='6' y='8' width='200' height='260' fill='%23000' opacity='.15'/%3E%0A%3Crect width='200' height='260' fill='%23f7f0e0' stroke='%236b4f3b' stroke-width='12'/%3E%0A%3Crect x='14' y='14' width='172' height='232' fill='%23f4c86a'/%3E%0A%3Ccircle cx='100' cy='100' r='38' fill='%23e0562f'/%3E%0A%3Cpath d='M14 190 Q 60 150 100 190 T 186 190 L186 246 L14 246Z' fill='%232c5e96'/%3E%0A%3C/g%3E%0A%3Cg transform='translate(930 430) rotate(5)' opacity='.9'%3E%0A%3Crect x='6' y='8' width='220' height='170' fill='%23000' opacity='.15'/%3E%0A%3Crect width='220' height='170' fill='%23f7f0e0' stroke='%238a6a2f' stroke-width='12'/%3E%0A%3Crect x='14' y='14' width='192' height='142' fill='%23a7c7d9'/%3E%0A%3Ccircle cx='160' cy='50' r='16' fill='%23f2c94c'/%3E%0A%3Cpath d='M14 156 L14 110 Q 70 60 120 110 T 206 100 L206 156Z' fill='%234d8b5c'/%3E%0A%3C/g%3E%0A%3Cg transform='translate(990 60) rotate(8)' opacity='.9'%3E%0A%3Crect x='6' y='8' width='130' height='170' fill='%23000' opacity='.15'/%3E%0A%3Crect width='130' height='170' fill='%23f7f0e0' stroke='%235a3d2a' stroke-width='10'/%3E%0A%3Crect x='12' y='12' width='106' height='146' fill='%231f3a6b'/%3E%0A%3Ccircle cx='65' cy='85' r='16' fill='none' stroke='%23f2d16b' stroke-width='6'/%3E%0A%3Ccircle cx='65' cy='85' r='34' fill='none' stroke='%237fb3e0' stroke-width='5'/%3E%0A%3Ccircle cx='65' cy='85' r='52' fill='none' stroke='%23f2d16b' stroke-width='4' stroke-dasharray='18 10'/%3E%0A%3C/g%3E%0A%3Cg transform='translate(120 560) rotate(4)' opacity='.9'%3E%0A%3Crect x='6' y='8' width='170' height='130' fill='%23000' opacity='.15'/%3E%0A%3Crect width='170' height='130' fill='%23f7f0e0' stroke='%236b4f3b' stroke-width='10'/%3E%0A%3Crect x='12' y='12' width='70' height='106' fill='%23c43e34'/%3E%0A%3Crect x='82' y='12' width='76' height='50' fill='%23f2c94c'/%3E%0A%3Crect x='82' y='62' width='76' height='56' fill='%232c5e96'/%3E%0A%3C/g%3E%0A%3C/svg%3E") center / cover no-repeat;
-}
-
-main {
-  max-width: 560px;
+  font-family: Arial, sans-serif;
+  max-width: 500px;
   margin: 0 auto;
+  padding: 20px;
 }
 
 h1 {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.8rem;
-  color: #4a2f1f;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
-
   text-align: center;
-  margin-bottom: 1.5rem;
 }
 
-h2 {
-  font-family: Georgia, "Times New Roman", serif;
-  color: #4a2f1f;
-  font-size: 1.1rem;
-  margin-top: 2rem;
+/* Statistiques */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 20px;
 }
 
+.stat {
+  border: 1px solid #999;
+  padding: 8px;
+  text-align: center;
+}
+
+.stat-valeur {
+  display: block;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.stat-label {
+  font-size: 0.8em;
+}
+
+/* Formulaire */
 form {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  background: #ffffff;
-  padding: 1.25rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-}
-
-label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  margin-top: 0.4rem;
+  gap: 8px;
+  border: 1px solid #999;
+  padding: 15px;
 }
 
 input {
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
+  padding: 6px;
 }
 
 button {
-  margin-top: 1rem;
-  padding: 0.6rem;
-  border: none;
-  border-radius: 6px;
-  background-color: #6b4f3b;
-  color: white;
-  font-size: 1rem;
-  cursor: pointer;
+  margin-top: 10px;
+  padding: 8px;
 }
 
-button:hover {
-  background-color: #543d2c;
-}
-
+/* Cartes des œuvres */
 .carte-oeuvre {
-  background: #ffffff;
-  border-left: 4px solid #6b4f3b;
-  border-radius: 8px;
-  padding: 1rem 1.25rem;
-  margin-top: 0.75rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  border: 1px solid #999;
+  padding: 10px;
+  margin-top: 10px;
 }
 
 .titre-oeuvre {
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin: 0 0 0.25rem;
+  font-weight: bold;
 }
 
 .artiste-annee-oeuvre {
   font-style: italic;
-  color: #555;
-  margin: 0 0 0.5rem;
-}
-
-.technique-oeuvre,
-.musee-oeuvre {
-  margin: 0.2rem 0;
-  font-size: 0.9rem;
-}
-
-/* Petits tableaux de statistiques */
-.stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.5rem;
-  margin-bottom: 1.25rem;
-}
-
-.stat {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.15rem;
-  padding: 0.5rem 0.25rem;
-  background: rgba(255, 255, 255, 0.92);
-  border-top: 3px solid #6b4f3b;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  text-align: center;
-}
-
-/* Une touche de couleur par case, comme des tubes de peinture */
-.stat:nth-child(1) { border-top-color: #c43e34; }
-.stat:nth-child(2) { border-top-color: #2c5e96; }
-.stat:nth-child(3) { border-top-color: #e8b428; }
-.stat:nth-child(4) { border-top-color: #3c826e; }
-.stat:nth-child(5) { border-top-color: #d9803a; }
-.stat:nth-child(6) { border-top-color: #7a4a8c; }
-
-.stat-valeur {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #4a2f1f;
-}
-
-.stat-label {
-  font-size: 0.68rem;
-  color: #666;
-  line-height: 1.2;
-}
-
-/* Petit effet quand une valeur change */
-.stat-valeur.maj {
-  animation: pop 0.4s ease;
-}
-
-@keyframes pop {
-  0% { transform: scale(1); }
-  40% { transform: scale(1.35); color: #c43e34; }
-  100% { transform: scale(1); }
-}
-
-.stat:nth-child(7) { border-top-color: #c43e34; }
-.stat:nth-child(8) { border-top-color: #2c5e96; }
-
-/* ===== Ajouts parties 2 à 4 ===== */
-
-/* Message de validation sous le formulaire */
-.message-erreur {
-  min-height: 1.2rem;
-  margin: 0.5rem 0 0;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #b3261e;
-}
-
-.message-erreur.ok {
-  color: #2e7d32;
-}
-
-/* Contrôle de saisie en temps réel */
-input.invalide {
-  border-color: #b3261e;
-  background: #fdecea;
-}
-
-input.valide {
-  border-color: #2e7d32;
-}
-
-/* Liste de cartes */
-.liste-oeuvres {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-top: 0.75rem;
-}
-
-.liste-oeuvres .carte-oeuvre {
-  position: relative;
-  margin-top: 0;
-}
-
-.liste-oeuvres .titre-oeuvre {
-  padding-right: 5rem;
-}
-
-.vide {
-  margin: 0;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.85);
-  border-radius: 8px;
-  font-style: italic;
-  color: #666;
-}
-
-/* Badge d'époque (switch) */
-.badge-epoque {
-  display: inline-block;
-  margin-bottom: 0.4rem;
-  padding: 0.1rem 0.55rem;
-  border-radius: 999px;
-  background: #6b4f3b;
-  color: #fff;
-  font-size: 0.7rem;
-  font-weight: 700;
-}
-
-.epoque-ancien { background: #7a4a8c; }
-.epoque-classique { background: #c43e34; }
-.epoque-xix { background: #2c5e96; }
-.epoque-moderne { background: #3c826e; }
-
-.date-ajout {
-  margin: 0.5rem 0 0;
-  font-size: 0.75rem;
-  color: #888;
-}
-
-/* Bouton de suppression */
-.btn-supprimer {
-  position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-  margin: 0;
-  padding: 0.25rem 0.6rem;
-  font-size: 0.8rem;
-  background-color: #b3261e;
-}
-
-.btn-supprimer:hover {
-  background-color: #8c1d18;
-}
-
-/* Recherche + filtre (partie 4) */
-.filtres {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
-}
-
-.filtres input {
-  flex: 1;
-  min-width: 0;
-}
-
-select {
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background: #fff;
-  font-size: 1rem;
 }

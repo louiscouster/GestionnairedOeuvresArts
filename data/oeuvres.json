@@ -1,0 +1,23 @@
+[
+  {
+    "titre": "La Joconde",
+    "artiste": "Léonard de Vinci",
+    "annee": 1503,
+    "technique": "Huile sur bois de peuplier",
+    "musee": "Musée du Louvre, Paris"
+  },
+  {
+    "titre": "La Nuit étoilée",
+    "artiste": "Vincent van Gogh",
+    "annee": 1889,
+    "technique": "Huile sur toile",
+    "musee": "Museum of Modern Art (MoMA), New York"
+  },
+  {
+    "titre": "La Persistance de la mémoire",
+    "artiste": "Salvador Dalí",
+    "annee": 1931,
+    "technique": "Huile sur toile",
+    "musee": "Museum of Modern Art (MoMA), New York"
+  }
+]
