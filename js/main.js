@@ -10,6 +10,7 @@ const oeuvres = [];
 // ===== Les éléments de la page =====
 
 const carteOriginale = document.querySelector("#carte-oeuvre");
+const conteneur = carteOriginale.parentElement; // l'endroit où on ajoute les cartes
 const messageErreur = document.querySelector("#message-erreur");
 
 const formulaire = document.querySelector("#formulaire-oeuvre");
@@ -36,12 +37,28 @@ const remplirCarte = (carte, oeuvre) => {
   carte.querySelector(".musee-oeuvre").textContent = oeuvre.musee;
 };
 
+// Supprime une œuvre : du tableau ET de la page
+const supprimerOeuvre = (oeuvre, carte) => {
+  const position = oeuvres.indexOf(oeuvre);
+  oeuvres.splice(position, 1); // retire l'œuvre du tableau
+  carte.remove(); // retire la carte de la page
+  mettreAJourStats();
+};
+
+// Fait en sorte que le bouton « Supprimer » d'une carte supprime son œuvre
+const brancherSuppression = (carte, oeuvre) => {
+  carte.querySelector(".btn-supprimer").addEventListener("click", () => {
+    supprimerOeuvre(oeuvre, carte);
+  });
+};
+
 // Copie la carte modèle, la remplit, et l'ajoute à la page
 const ajouterCarte = (oeuvre) => {
   const nouvelleCarte = carteOriginale.cloneNode(true);
   nouvelleCarte.removeAttribute("id");
   remplirCarte(nouvelleCarte, oeuvre);
-  carteOriginale.parentElement.append(nouvelleCarte);
+  brancherSuppression(nouvelleCarte, oeuvre);
+  conteneur.append(nouvelleCarte);
 };
 
 // ===== Les statistiques =====
@@ -57,10 +74,21 @@ const compterDistincts = (valeurs) => {
 };
 
 const mettreAJourStats = () => {
+  statTotal.textContent = oeuvres.length;
+
+  // Plus aucune œuvre : on évite de calculer une moyenne sur une liste vide
+  if (oeuvres.length === 0) {
+    statArtistes.textContent = 0;
+    statMusees.textContent = 0;
+    statAnneeMoyenne.textContent = "–";
+    statAgeMoyen.textContent = "–";
+    statPlusAncienne.textContent = "–";
+    return;
+  }
+
   const annees = oeuvres.map((o) => o.annee);
   const ages = oeuvres.map((o) => o.calculerAge());
 
-  statTotal.textContent = oeuvres.length;
   statArtistes.textContent = compterDistincts(oeuvres.map((o) => o.artiste));
   statMusees.textContent = compterDistincts(oeuvres.map((o) => o.musee));
   statAnneeMoyenne.textContent = Math.round(moyenne(annees));
@@ -109,10 +137,15 @@ const demarrer = async () => {
     // La 1re œuvre va dans la carte existante, les autres sont copiées
     const [premiereOeuvre, ...autresOeuvres] = oeuvres;
     remplirCarte(carteOriginale, premiereOeuvre);
+    brancherSuppression(carteOriginale, premiereOeuvre);
     autresOeuvres.forEach((oeuvre) => ajouterCarte(oeuvre));
     mettreAJourStats();
   } catch (erreur) {
     carteOriginale.querySelector(".titre-oeuvre").textContent = "Aucune œuvre chargée";
+    // Ici le bouton retire simplement la carte vide
+    carteOriginale.querySelector(".btn-supprimer").addEventListener("click", () => {
+      carteOriginale.remove();
+    });
     messageErreur.textContent = erreur.message;
   }
 };

@@ -62,3 +62,16 @@ const listeVoitures = async () => {
     document.querySelector('#catalogue').textContent =
         voitures.map((v) => `${v.marque} ${v.modele} (${v.kilometrage} km)`).join(", ");
 }
+
+for (let v of resultat) {
+  const voiture = new Vehicule(v.marque, v.modele, v.kilometrage, v.prix);
+    voiture.push
+}
+const voitures = resultat.map((v) => {return new Vehicule(v.marque, v.modele, v.kilometrage, v.prix);
+  return voitures;
+});
+
+console.log(voitures);
+
+const listes = listeVoitures();
+console.log(listes);  
