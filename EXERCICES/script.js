@@ -55,3 +55,10 @@ const filtrerStock = () => {
         visibles.map((a) => a.nom).join(", ");
 }
 
+
+const listeVoitures = async () => {
+    const response = await fetch("EXERCICES/voiture.json");
+    const voitures = await response.json();
+    document.querySelector('#catalogue').textContent =
+        voitures.map((v) => `${v.marque} ${v.modele} (${v.kilometrage} km)`).join(", ");
+}

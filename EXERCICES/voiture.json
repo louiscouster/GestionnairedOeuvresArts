@@ -1,0 +1,27 @@
+[
+    {
+        "marque": "Toyota",
+        "modele": "Corolla",
+        "kilometrage": "1545"
+    },
+    {
+        "marque": "Honda",
+        "modele": "Civic",
+        "kilometrage": "2000"
+    },
+    {
+        "marque": "Ford",
+        "modele": "Focus",
+        "kilometrage": "3000"
+    },
+    {
+        "marque": "Chevrolet",
+        "modele": "Cruze",
+        "kilometrage": "2500"
+    },
+    {
+        "marque": "Nissan",
+        "modele": "Sentra",
+        "kilometrage": "1800"
+    }
+]
